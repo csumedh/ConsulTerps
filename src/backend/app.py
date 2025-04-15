@@ -8,7 +8,7 @@ app = Flask(__name__, static_folder="build", static_url_path="")
 CORS(app)
 
 # === Path to Excel (adjusted for Windows-friendly relative path) ===
-excel_file_path = os.path.join("data", "Framework_matrix.xlsx")
+excel_file_path = os.path.join("..", "data", "framework_matrix.xlsx")
 
 try:
     df = pd.read_excel(excel_file_path)

@@ -1,6 +1,5 @@
 @echo off
 echo 🚧 Building React frontend...
-cd src
 call npm run build
 
 if errorlevel 1 (
@@ -9,10 +8,10 @@ if errorlevel 1 (
 )
 
 echo 🚚 Moving build to Flask backend...
-rmdir /s /q backend\build
-xcopy /E /I /Y build backend\build
+rmdir /s /q src\backend\build
+xcopy /E /I /Y build src\backend\build
 
 echo 🚀 Starting Flask server...
-cd backend
+cd src\backend
 call ..\..\venv\Scripts\activate
 python app.py
