@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import "./App.css";
+// src/pages/FrameworkRecommender.jsx
 
-// Framework question data remains the same.
+import React, { useState } from "react";
+import { Button } from "../components/ui/button";
+import { Card, CardContent } from "../components/ui/card";
+import { Label } from "../components/ui/label";
+import "../App.css";
+
 const frameworkData = [
   {
     factor: "Team Size",
@@ -67,26 +68,23 @@ export default function FrameworkRecommender() {
   };
 
   const calculateRecommendation = () => {
-    // Optionally, add validations to ensure all required answers are provided.
     setLoading(true);
     fetch("http://localhost:5000/recommend", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      // Send the user-selected answers to the backend
       body: JSON.stringify({ answers })
     })
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
-        // Assume the backend returns a JSON with "recommendations" as an array.
         setResults(data.recommendations);
         setLoading(false);
       })
-      .catch((error) => {
-        console.error("Error fetching recommendations:", error);
+      .catch((err) => {
+        console.error("Error:", err);
         setLoading(false);
-        alert("Failed to get recommendations from the backend.");
+        alert("Could not fetch recommendation.");
       });
   };
 
@@ -97,7 +95,7 @@ export default function FrameworkRecommender() {
       {frameworkData.map(({ factor, options }) => (
         <Card key={factor} className="mb-4">
           <CardContent className="space-y-2">
-            <Label className="font-semibold">{factor}</Label>
+            <Label>{factor}</Label>
             <select
               className="w-full border p-2 rounded"
               value={answers[factor] || ""}
@@ -112,7 +110,7 @@ export default function FrameworkRecommender() {
         </Card>
       ))}
 
-      <Button onClick={calculateRecommendation} className="w-full mb-4" disabled={loading}>
+      <Button onClick={calculateRecommendation} disabled={loading} className="w-full mb-4">
         {loading ? "Loading..." : "Get Recommendations"}
       </Button>
 
