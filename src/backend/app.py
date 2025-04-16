@@ -3,21 +3,21 @@ from flask_cors import CORS
 import pandas as pd
 import os
 
-# Serve from build/ (React's production build)
-app = Flask(__name__, static_folder="build", static_url_path="")
+# Correct static folder path relative to backend
+static_dir = os.path.join(os.path.dirname(__file__), "build")
+
+app = Flask(__name__, static_folder=static_dir, static_url_path="")
 CORS(app)
 
-# === Path to Excel (adjusted for Windows-friendly relative path) ===
-excel_file_path = os.path.join("..", "data", "framework_matrix.xlsx")
-
+# Load scoring matrix
+excel_path = os.path.join(os.path.dirname(__file__), "..", "data", "framework_matrix.xlsx")
 try:
-    df = pd.read_excel(excel_file_path)
+    df = pd.read_excel(excel_path)
     scoring_data = df.to_dict(orient="records")
 except Exception as e:
     print(f"❌ Error reading Excel file: {e}")
     scoring_data = []
 
-# === Scoring Configuration ===
 framework_data = [
     {"factor": "Team Size", "weight": 3},
     {"factor": "Cross-functional Teams", "weight": 2},
@@ -69,10 +69,10 @@ def recommend():
         "fivesCount": fives_count
     })
 
-# === React frontend routes ===
+# Fallback for React routes like /recommender or /faq
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
-def serve_react(path):
+def serve_spa(path):
     if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
     else:

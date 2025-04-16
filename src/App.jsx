@@ -3,22 +3,33 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import FAQPage from "./pages/FAQPage";
 import FrameworkRecommender from "./pages/FrameworkRecommender";
+import ContactPage from "./pages/ContactPage";
+import "./App.css";
 
 function App() {
   return (
     <Router>
       <div className="app">
-        {/* Navigation */}
-        <nav style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
-          <Link to="/" style={{ marginRight: "1rem" }}>Home</Link>
-          <Link to="/faq" style={{ marginRight: "1rem" }}>FAQ / How To</Link>
-          <Link to="/recommender">Recommender</Link>
+        {/* ✅ Styled Navbar */}
+        <nav style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "2rem",
+          padding: "1rem",
+          backgroundColor: "#282c34",
+          color: "#fff"
+        }}>
+          <Link style={{ color: "#61dafb", textDecoration: "none" }} to="/">🏠 Home</Link>
+          <Link style={{ color: "#61dafb", textDecoration: "none" }} to="/faq">📖 How To</Link>
+          <Link style={{ color: "#61dafb", textDecoration: "none" }} to="/recommender">🤖 Recommender</Link>
+          <Link style={{ color: "#61dafb", textDecoration: "none" }} to="/contact">📬 Contact Us</Link>
         </nav>
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/recommender" element={<FrameworkRecommender />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </div>
     </Router>

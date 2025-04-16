@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+@keyframes turtleMove {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: calc(100% - 60px);
+  }
+}
+
+@keyframes progressFill {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
