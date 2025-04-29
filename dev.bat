@@ -1,0 +1,9 @@
+@echo off
+echo 🔧 Activating virtual environment...
+call venv\Scripts\activate
+
+echo 🚀 Launching Flask backend in a new terminal...
+start cmd /k "cd src\backend && ..\..\venv\Scripts\activate && python app.py"
+
+echo 🌐 Starting React development server...
+call npm start

@@ -1,14 +1,23 @@
-from flask import Flask, request, jsonify, send_from_directory
-from flask_cors import CORS
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse, FileResponse, RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import pandas as pd
 import os
 
+app = FastAPI()
 
-# Correct static folder path relative to backend
+# Allow CORS for frontend (React)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Or ["http://localhost:3000"] if you want restricted
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Static files serving
 static_dir = os.path.join(os.path.dirname(__file__), "build")
-
-app = Flask(__name__, static_folder=static_dir, static_url_path="")
-CORS(app)
+app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
 
 # Load scoring matrix
 excel_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "framework_matrix.xlsx")
@@ -36,9 +45,9 @@ frameworks = [
     "Kanban", "LeSS", "Waterfall", "Disciplined Agile", "Crystal"
 ]
 
-@app.route("/recommend", methods=["POST"])
-def recommend():
-    data = request.get_json()
+@app.post("/recommend")
+async def recommend(request: Request):
+    data = await request.json()
     answers = data.get("answers", {})
 
     total_scores = {fw: 0 for fw in frameworks}
@@ -64,20 +73,16 @@ def recommend():
     sorted_frameworks = sorted(frameworks, key=lambda fw: (total_scores[fw], fives_count[fw]), reverse=True)
     top3 = sorted_frameworks[:3]
 
-    return jsonify({
+    return JSONResponse({
         "recommendations": top3,
         "totalScores": total_scores,
         "fivesCount": fives_count
     })
 
-# Fallback for React routes like /recommender or /faq
-@app.route("/", defaults={"path": ""})
-@app.route("/<path:path>")
-def serve_spa(path):
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
-        return send_from_directory(app.static_folder, path)
-    else:
-        return send_from_directory(app.static_folder, "index.html")
-
-if __name__ == "__main__":
-    app.run(debug=True)
+# Handle fallback for non-API routes (send React index.html)
+@app.get("/{full_path:path}")
+async def serve_spa(full_path: str):
+    index_path = os.path.join(static_dir, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return RedirectResponse("/")
