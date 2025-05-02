@@ -69,8 +69,6 @@
   /* Button group styling */
   .button-group {
     display: flex;
-    background-color: #8c5eff;
-    color: white;
     justify-content: center;
     gap: 1rem;
     margin-top: 2rem;
