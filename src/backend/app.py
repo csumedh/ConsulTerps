@@ -2,15 +2,16 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import pandas as pd
 import os
+import json
+import uuid
 
-
-# Correct static folder path relative to backend
+# Static folder path for serving React frontend
 static_dir = os.path.join(os.path.dirname(__file__), "build")
 
 app = Flask(__name__, static_folder=static_dir, static_url_path="")
 CORS(app)
 
-# Load scoring matrix
+# Load Excel matrix
 excel_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "framework_matrix.xlsx")
 try:
     df = pd.read_excel(excel_file_path)
@@ -19,6 +20,7 @@ except Exception as e:
     print(f"❌ Error reading Excel file: {e}")
     scoring_data = []
 
+# Factors and frameworks
 framework_data = [
     {"factor": "Team Size", "weight": 3},
     {"factor": "Cross-functional Teams", "weight": 2},
@@ -70,7 +72,43 @@ def recommend():
         "fivesCount": fives_count
     })
 
-# Fallback for React routes like /recommender or /faq
+# ===============================
+# ✅ UID-based Save & Retrieve
+# ===============================
+RESULTS_FILE = os.path.join(os.path.dirname(__file__), "results.json")
+
+def load_results():
+    if not os.path.exists(RESULTS_FILE):
+        return []
+    with open(RESULTS_FILE, 'r') as f:
+        return json.load(f)
+
+def save_result_entry(entry):
+    results = load_results()
+    results.append(entry)
+    with open(RESULTS_FILE, 'w') as f:
+        json.dump(results, f, indent=2)
+
+@app.route("/save-result", methods=["POST"])
+def save_result():
+    data = request.get_json()
+    recommendations = data.get("recommendations", [])
+    new_id = "CT-" + uuid.uuid4().hex[:6]
+    entry = {"id": new_id, "recommendations": recommendations}
+    save_result_entry(entry)
+    return jsonify({"id": new_id})
+
+@app.route("/results/<id>", methods=["GET"])
+def get_result(id):
+    results = load_results()
+    result = next((r for r in results if r["id"] == id), None)
+    if result:
+        return jsonify(result)
+    return jsonify({"error": "Result not found"}), 404
+
+# ===============================
+# ✅ Fallback for React SPA Routes
+# ===============================
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def serve_spa(path):

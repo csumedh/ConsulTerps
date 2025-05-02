@@ -69,6 +69,8 @@
   /* Button group styling */
   .button-group {
     display: flex;
+    background-color: #8c5eff;
+    color: white;
     justify-content: center;
     gap: 1rem;
     margin-top: 2rem;
@@ -96,3 +98,45 @@
   .group:hover .group-hover\:block {
     display: block;
   }  
+
+  .tooltip-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip-icon {
+    background-color: #6b7280;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 8px;
+    z-index: 1;
+  }
+  
+  .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    width: 280px;
+    background-color: #333;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    top: 50px; /* Adjust as needed */
+    right: 0;
+    z-index: 2;
+    transition: opacity 0.3s;
+    white-space: pre-line;
+  }
+  
+  .tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "../App.css";
+import frameworkInfo from "../data/frameworkInfo";
 import "../styles/Recommender.css";
 
 const frameworkData = [
@@ -22,58 +23,21 @@ const frameworkData = [
   { factor: "Use of Tools", options: ["Yes or Open to Use", "No"], tooltip: "Clarifying your openness to digital tracking ensures recommendations match your team’s workflow:\n Yes: Teams using backlogs, Kanban or sprint boards, and burndown/burnup charts can leverage tool‑centric frameworks like Scrum, SAFe, or LeSS for maximum visibility and metrics.\n No: If you rely on manual or low‑tech tracking—whiteboards, simple checklists or spreadsheets—we’ll recommend frameworks that thrive without specialized apps." }
 ];
 
-
-// Mapping for descriptions and links
-const frameworkInfo = {
-  Scrum: {
-    description: "Scrum is one of the most widely used Agile frameworks, known for its sprint-based structure, fixed roles (Scrum Master, Product Owner, Developers), and emphasis on iterative delivery. It is highly effective for fast-paced product development projects where requirements evolve rapidly and quick feedback loops are essential. Based on your decision weights, Scrum is best suited for small, cross-functional teams that can deliver weekly, prefer flexible workflows, and prioritize scope as the most adjustable constraint. It thrives in non-regulated environments and integrates seamlessly with modern tools like Jira and Trello. -Scrum is great for startups or small dev teams building apps, software features, or prototypes. -Choose Scrum when teamwork, feedback, and speed matter more than long-term forecasting.",
-    link: "https://www.scrum.org/"
-  },
-  Kanban: {
-    description: "Kanban is a visual workflow management system designed to optimize continuous delivery without imposing iterations or specific roles. It’s great for operations, service teams, or teams looking to evolve their workflow organically. Your decision weights show that Kanban fits small, cross-functional teams delivering daily, who need flexible, visual workflows, and operate in non-regulated environments. It’s especially effective when schedule flexibility is key and tools like Trello or Jira are already in place. -Use Kanban for DevOps, customer support, marketing campaigns, or any team handling frequent task inflow. -Choose Kanban when flow efficiency and work-in-progress visibility matter most.",
-    link: "https://kanbanize.com/kanban-resources/getting-started/what-is-kanban"
-  },
-  SAFe: {
-    description: "SAFe is a structured Agile framework tailored for large enterprises needing to scale Agile across multiple teams and departments. It introduces roles like Release Train Engineers and aligns team execution with business strategy. According to your model, SAFe fits large, cross-functional teams in regulated industries (e.g., healthcare, finance) that deliver weekly or monthly and require both governance and agility. It supports flexible changes, focuses on scope management, and is ideal when tools are already in use for coordination and tracking. -SAFe is ideal for digital transformation efforts or enterprise-wide software development. -Choose SAFe if multiple teams need to align under shared planning and delivery cycles.",
-    link: "https://scaledagileframework.com/"
-  },
-  "Six Sigma": {
-    description: "Six Sigma is a process improvement methodology that aims to reduce defects and enhance quality through data-driven decisions, often applied in manufacturing, logistics, and healthcare. It’s more analytical than iterative, emphasizing statistical control rather than adaptability. Your weights suggest Six Sigma is best for large teams in highly regulated industries where budget is the primary constraint, deliverables are often on demand, and the environment is structured and inflexible. -Six Sigma is most effective in environments where precision, efficiency, and quality are top priorities. -Choose Six Sigma for stable processes needing optimization—not rapidly changing product builds.",
-    link: "https://www.isixsigma.com/"
-  },
-  "PRINCE2": {
-    description: "PRINCE2 is a governance-focused project management methodology originating in the UK government sector. It breaks projects into controlled stages and is known for its rigor, documentation, and role clarity. Based on your scoring, PRINCE2 works best for large, non-cross-functional teams delivering on a weekly cadence in regulated environments. It favors rigid planning, prioritizes budget control, and suits teams using tracking tools where visibility and compliance are critical. -Use PRINCE2 for infrastructure, policy, or government-funded projects where audits are likely. -Choose this framework when you need structure, accountability, and clearly assigned roles.",
-    link: "https://www.axelos.com/best-practice-solutions/prince2"
-  },
-  "Stage-Gate": {
-    description: "Stage-Gate is a phase-based approach to product development commonly used in industries like pharmaceuticals and hardware engineering. Projects pass through predefined gates where continuation is reviewed based on business case alignment. According to your analysis, Stage-Gate is ideal for large, structured teams in regulated industries, delivering monthly with limited flexibility. It’s especially suited for organizations prioritizing budget control, formal checkpoints, and senior-level oversight. -Stage-Gate works best for R&D and innovation projects requiring multiple internal reviews. -Choose Stage-Gate when decisions need executive approval before progressing.",
-    link: "https://www.stage-gate.com/"
-  },
-  LeSS: {
-    description: "LeSS is a minimal extension of Scrum for scaling across multiple teams working on the same product. It maintains Agile values while simplifying coordination between teams. Based on your scoring logic, LeSS is most appropriate for medium-sized, cross-functional teams delivering weekly in non-regulated, product-focused settings. It allows some flexibility, favors scope adjustability, and works well when multiple Scrum teams need to align with minimal process overhead. -LeSS is excellent for scaling product teams without heavy governance or complex process layers. -Choose LeSS when your teams already use Scrum but now need to coordinate more closely.",
-    link: "https://less.works/"
-  },
-  Waterfall: {
-    description: "Waterfall is a traditional, linear project management methodology where each phase—requirements, design, development, testing—must be completed before moving to the next. It’s best suited for projects with fixed scope and minimal expected change. According to your weights, Waterfall is ideal for medium-sized teams operating in regulated sectors with a monthly deliverable cycle, low flexibility, structured workflows, and strong emphasis on budget control. -Waterfall fits well in civil engineering, defense, and regulated manufacturing. -Choose Waterfall if you need high predictability, heavy documentation, and sequential sign-offs.",
-    link: "https://www.atlassian.com/agile/project-management/waterfall"
-  },
-  "Disciplined Agile": {
-    description: "Disciplined Agile is a flexible process decision toolkit that blends strategies from multiple Agile approaches (Scrum, Kanban, SAFe, XP) and helps organizations define their own 'Way of Working' (WoW). Your data suggests DA suits small teams working on process improvement or product dev, delivering daily, with schedule flexibility, and working in moderately regulated environments. It's ideal for organizations that want to apply Agile principles but also require guidance on tailoring their approach across business functions. -DA is especially useful in enterprise settings moving from chaos to guided agility. -Choose DA when you need structured choices rather than one prescribed method.",
-    link: "https://www.pmi.org/disciplined-agile"
-  },
-  Crystal: {
-    description: "Crystal is an Agile family that prioritizes people, communication, and team context over rigid processes. It adapts based on team size and criticality, with the goal of minimizing process overhead. Based on your weights, Crystal fits small, cross-functional teams working on product development with daily deliveries, high flexibility, and no regulatory constraints. It’s perfect for creative environments or startups where lightweight practices and team trust are more valuable than documentation and structure. -Crystal excels in face-to-face environments where close collaboration and rapid iteration are key. -Choose Crystal if your team values adaptability, low process friction, and fast decision-making.",
-    link: "https://agilemanifesto.org/"
-  }
-};
-
 export default function FrameworkRecommender() {
   const [answers, setAnswers] = useState({});
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
+  const [userId, setUserId] = useState("");
+  const [copied, setCopied] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const resultsRef = useRef(null);
   const currentIndex = Object.keys(answers).length;
+
+const handleCopy = () => {
+  navigator.clipboard.writeText(userId);
+  setCopied(true);
+  setTimeout(() => setCopied(false), 2000);
+};
 
   const handleChange = (factor, value) => {
     setAnswers({ ...answers, [factor]: value });
@@ -89,6 +53,7 @@ export default function FrameworkRecommender() {
   const clearForm = () => {
     setAnswers({});
     setResults([]);
+    setUserId("");
     setShowResults(false);
     setLoading(false);
   };
@@ -108,7 +73,20 @@ export default function FrameworkRecommender() {
           setLoading(false);
           setShowResults(true);
           setResults(data.recommendations);
+          setUserId(data.userId); // ✅ Capture ID from response
           resultsRef.current?.scrollIntoView({ behavior: "smooth" });
+
+          // Save to backend and get UID
+          fetch("http://localhost:5000/save-result", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ recommendations: data.recommendations })
+          })
+          .then(res => res.json())
+          .then(saveRes => {
+            setUserId(saveRes.id);
+          })
+          .catch(() => console.error("Could not save results"));
         }, 2000);
       })
       .catch(() => {
@@ -126,24 +104,19 @@ export default function FrameworkRecommender() {
       {/* Question Block */}
       {!loading && !showResults && (
         <div className="question-slide">
-          <div className="question-card">
+          <div className="question-card relative">
             {question ? (
               <>
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <h2 className="text-white">{question.factor}</h2>
-                  {/* Tooltip next to question */}
-                  {question.tooltip && (
-                    <div className="relative group flex items-center">
-                    <span className="text-white cursor-pointer text-sm bg-gray-600 px-2 py-1 rounded hover:bg-gray-700">
-                      What this means
-                    </span>
-                    <div className="absolute left transform -translate-x-1/2 mt-2 w-72 p-3 rounded-md bg-gray-800 text-white text-sm shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 whitespace-pre-line">
-                      <strong>{question.factor}:</strong> {question.tooltip}
+                {question.tooltip && (
+                  <div className="tooltip-container absolute top-4 right-4">
+                    <span className="tooltip-icon">?</span>
+                    <div className="tooltip-text">
+                      <strong>{question.factor}:</strong>{"\n"}{question.tooltip}
                     </div>
                   </div>
-                  )}
-                </div>
+                )}
 
+                <h2 className="text-white text-xl font-semibold text-center mb-6">{question.factor}</h2>
                 <select
                   value={answers[question.factor] || ""}
                   onChange={(e) => handleChange(question.factor, e.target.value)}
@@ -199,7 +172,27 @@ export default function FrameworkRecommender() {
       {/* Results */}
       {showResults && (
         <div ref={resultsRef} className="w-full max-w-2xl mt-12 bg-[#f0e6ff] text-black rounded-xl p-6">
+          {userId && (
+            <div className="mb-4 p-4 bg-white rounded shadow">
+              <strong>Your Identifier:</strong>{" "}
+              <span className="text-purple-700">{userId}</span><br />
+              Save this ID to retrieve your results later.
+            </div>
+          )}
+
           <h2 className="text-2xl font-bold mb-3">Your Inputs</h2>
+          {userId && (
+            <div className="mb-4 text-sm text-gray-800 flex items-center gap-2">
+              <span><strong>Your ID:</strong> <code>{userId}</code></span>
+              <button
+                onClick={handleCopy}
+                className="px-2 py-1 bg-gray-300 rounded hover:bg-gray-400 text-xs"
+              >
+                Copy
+              </button>
+              {copied && <span className="text-green-600">Copied!</span>}
+            </div>
+          )}
           <ul className="list-disc ml-6 mb-6">
             {Object.entries(answers).map(([factor, value]) => (
               <li key={factor}><strong>{factor}:</strong> {value}</li>
@@ -210,7 +203,9 @@ export default function FrameworkRecommender() {
             {results.map(fw => (
               <li key={fw} className="break-words">
                 <div className="font-bold">{fw}</div>
-                <div className="text-sm break-words whitespace-pre-wrap">{frameworkInfo[fw]?.description || "No description available."}</div>
+                <div className="text-sm break-words whitespace-pre-wrap">
+                  {frameworkInfo[fw]?.description || "No description available."}
+                </div>
                 <a
                   href={frameworkInfo[fw]?.link || "#"}
                   target="_blank"

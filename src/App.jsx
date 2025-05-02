@@ -4,6 +4,7 @@ import LandingPage from "./pages/LandingPage";
 import FAQPage from "./pages/FAQPage";
 import FrameworkRecommender from "./pages/FrameworkRecommender";
 import ContactPage from "./pages/ContactPage";
+import ResultsLookup from "./pages/ResultsLookup";
 import "./App.css";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Link style={{ color: "#61dafb", textDecoration: "none" }} to="/faq">📖 How To</Link>
           <Link style={{ color: "#61dafb", textDecoration: "none" }} to="/recommender">🤖 Recommender</Link>
           <Link style={{ color: "#61dafb", textDecoration: "none" }} to="/contact">📬 Contact Us</Link>
+          <Link style={{ color: "#61dafb", textDecoration: "none" }} to="/results">🎗️ Results</Link>
         </nav>
 
         <Routes>
@@ -30,6 +32,7 @@ function App() {
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/recommender" element={<FrameworkRecommender />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/results" element={<ResultsLookup />} />
         </Routes>
       </div>
     </Router>

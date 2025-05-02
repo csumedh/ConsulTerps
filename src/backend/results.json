@@ -1,0 +1,64 @@
+[
+  {
+    "id": "CT-abc123",
+    "recommendations": [
+      "Scrum",
+      "LeSS",
+      "Kanban"
+    ]
+  },
+  {
+    "id": "CT-xr8e9p",
+    "recommendations": [
+      "PRINCE2"
+    ]
+  },
+  {
+    "id": "CT-98ca83",
+    "recommendations": [
+      "Disciplined Agile",
+      "Kanban",
+      "PRINCE2"
+    ]
+  },
+  {
+    "id": "CT-f6d4c7",
+    "recommendations": [
+      "Disciplined Agile",
+      "Kanban",
+      "PRINCE2"
+    ]
+  },
+  {
+    "id": "CT-13824a",
+    "recommendations": [
+      "PRINCE2",
+      "Disciplined Agile",
+      "Stage-Gate"
+    ]
+  },
+  {
+    "id": "CT-83ebf3",
+    "recommendations": [
+      "Disciplined Agile",
+      "Kanban",
+      "PRINCE2"
+    ]
+  },
+  {
+    "id": "CT-8329d5",
+    "recommendations": [
+      "Disciplined Agile",
+      "Kanban",
+      "PRINCE2"
+    ]
+  },
+  {
+    "id": "CT-2971c5",
+    "recommendations": [
+      "Disciplined Agile",
+      "LeSS",
+      "Scrum"
+    ]
+  }
+]
