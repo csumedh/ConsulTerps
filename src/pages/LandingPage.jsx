@@ -49,25 +49,51 @@ export default function LandingPage() {
         <div className="team-grid">
           {[
             {
-              name: "Alice",
-              role: "Frontend Developer",
-              img: "/team/alice.jpg",
-              github: "https://github.com/alice",
-              linkedin: "https://linkedin.com/in/alice",
-              email: "mailto:alice@example.com",
-            },
-            {
-              name: "Bob",
-              role: "Backend Engineer",
+              name: "Sumedh",
+              role: "Project Manager",
               img: "/team/bob.jpg",
               github: "https://github.com/bob",
               linkedin: "https://linkedin.com/in/bob",
               email: "mailto:bob@example.com",
+            },            
+            {
+              name: "Sandra",
+              role: "Frontend Developer",
+              img: "/team/carol.jpg",
+              github: "https://github.com/alice",
+              linkedin: "https://linkedin.com/in/alice",
+              email: "mailto:alice@example.com",
+            },
+
+            {
+              name: "Anand",
+              role: "Backend Developer",
+              img: "/team/alice.jpg",
+              github: "https://github.com/carol",
+              linkedin: "https://linkedin.com/in/carol",
+              email: "mailto:carol@example.com",
+            },
+
+            {
+              name: "Matthew",
+              role: "R&D",
+              img: "/team/Matt.jpeg",
+              github: "https://github.com/carol",
+              linkedin: "https://linkedin.com/in/carol",
+              email: "mailto:carol@example.com",
             },
             {
-              name: "Carol",
+              name: "Aishwarya",
+              role: "Scrum Master",
+              img: "/team/Aish.jpeg",
+              github: "https://github.com/carol",
+              linkedin: "https://linkedin.com/in/carol",
+              email: "mailto:carol@example.com",
+            },
+            {
+              name: "Deepankar",
               role: "Designer",
-              img: "/team/carol.jpg",
+              img: "/team/deep.jpeg",
               github: "https://github.com/carol",
               linkedin: "https://linkedin.com/in/carol",
               email: "mailto:carol@example.com",
