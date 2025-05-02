@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "../components/Footer";
 
 export default function FAQPage() {
   return (
@@ -15,6 +16,7 @@ export default function FAQPage() {
         at runtime.
       </p>
       {/* Add more FAQs as needed */}
+      <Footer />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import frameworkInfo from "../data/frameworkInfo";
 import "../styles/Results.css";
+import Footer from "../components/Footer";
 
 export default function ResultsLookup() {
   const [code, setCode] = useState("");
@@ -26,7 +27,9 @@ export default function ResultsLookup() {
 
   return (
     <div className="results-bg">
-      <h1 className="text-white text-3xl font-bold mb-6 text-center">View Your Saved Frameworks</h1>
+      <h1 className="text-white text-3xl font-bold mb-6 text-center">
+        View Your Saved Frameworks
+      </h1>
 
       <div className="button-wrapper">
         <input
@@ -52,6 +55,18 @@ export default function ResultsLookup() {
             </span>
           </h2>
 
+          {data.name && (
+            <p className="text-sm text-gray-300 mb-1 text-center">
+              <strong>Project:</strong> {data.name}
+            </p>
+          )}
+
+          {data.email && (
+            <p className="text-sm text-gray-300 mb-4 text-center">
+              <strong>Email:</strong> {data.email}
+            </p>
+          )}
+
           <ol className="list-decimal ml-6 text-base space-y-6">
             {data.recommendations.map((r, i) => (
               <li key={i}>
@@ -72,6 +87,8 @@ export default function ResultsLookup() {
           </ol>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }

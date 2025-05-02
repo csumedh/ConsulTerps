@@ -1,5 +1,6 @@
 // src/pages/ContactPage.jsx
 import React from "react";
+import Footer from "../components/Footer";
 
 export default function ContactPage() {
   return (
@@ -9,4 +10,5 @@ export default function ContactPage() {
       <p>📞 Phone: +1 (555) 123-4567</p>
     </div>
   );
+  
 }

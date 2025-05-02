@@ -138,3 +138,23 @@
     visibility: visible;
     opacity: 1;
   }
+
+.recommender-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; 
+  margin-top: 1.5rem;
+}
+
+.recommender-input {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: none;
+  width: 100%;
+  max-width: 320px;
+  background-color: #d1c3ff;
+  color: #1f1f1f;
+  text-align: center;
+  font-size: 1rem;
+}

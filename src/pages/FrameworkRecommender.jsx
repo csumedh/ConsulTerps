@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import "../App.css";
 import frameworkInfo from "../data/frameworkInfo";
 import "../styles/Recommender.css";
+import "../styles/Results.css";
+import Footer from "../components/Footer";
 
 const frameworkData = [
   { factor: "Team Size", options: ["Small (1-10 people)", "Medium (11-50 people)", "Large (50+ people)"], tooltip: "Clarifying team size ensures appropriate team structure, effective communication, and optimal project performance. Smaller teams benefit from agile frameworks that emphasize flexibility, rapid decision-making, and close collaboration. Medium-sized teams often require structured methods balancing agility and formality for clear communication and coordination. Larger teams typically benefit from frameworks designed for scalability, structured communication channels, and defined roles, minimizing complexity and maximizing efficiency." },
@@ -29,6 +31,8 @@ export default function FrameworkRecommender() {
   const [results, setResults] = useState([]);
   const [userId, setUserId] = useState("");
   const [copied, setCopied] = useState(false);
+  const [projectName, setProjectName] = useState("");
+  const [email, setEmail] = useState("");
   const [showResults, setShowResults] = useState(false);
   const resultsRef = useRef(null);
   const currentIndex = Object.keys(answers).length;
@@ -80,7 +84,11 @@ const handleCopy = () => {
           fetch("http://localhost:5000/save-result", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ recommendations: data.recommendations })
+            body: JSON.stringify({
+              recommendations: data.recommendations,
+              name: projectName,
+              email
+            })
           })
           .then(res => res.json())
           .then(saveRes => {
@@ -134,21 +142,37 @@ const handleCopy = () => {
             {currentIndex > 0 && (
               <div className="back-button" onClick={goBack}>← Go Back</div>
             )}
-
+            <div className="recommender-input-wrapper">
+              <input
+                type="text"
+                value={projectName}
+                onChange={(e) => setProjectName(e.target.value)}
+                placeholder="Optional: Project Name"
+                className="recommender-input"
+              />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Optional: Email"
+                className="recommender-input"
+              />
+            </div>
             <div className="button-group">
-              <button
-                onClick={calculateRecommendation}
-                disabled={currentIndex !== frameworkData.length}
-                className="bg-[#8c5eff] hover:bg-[#a07eff] px-4 py-2 rounded text-white w-1/2"
-              >
-                Get Recommendations
-              </button>
-              <button
-                onClick={clearForm}
-                className="bg-[#ec4899] hover:bg-[#f472b6] px-4 py-2 rounded text-white w-1/2"
-              >
-                Clear Selections
-              </button>
+            <button
+              onClick={calculateRecommendation}
+              disabled={currentIndex !== frameworkData.length}
+              className="custom-button"
+            >
+              Get Recommendations
+            </button>
+
+            <button
+              onClick={clearForm}
+              className="custom-button"
+            >
+              Clear Selections
+            </button>
             </div>
           </div>
         </div>
@@ -219,6 +243,7 @@ const handleCopy = () => {
           </ol>
         </div>
       )}
+      <Footer />
     </div>
   );
 }

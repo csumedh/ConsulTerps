@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/LandingPage.css";
+import Footer from "../components/Footer";
 
 export default function LandingPage() {
   return (
@@ -93,6 +94,7 @@ export default function LandingPage() {
           ))}
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

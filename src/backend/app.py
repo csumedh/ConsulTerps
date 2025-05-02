@@ -5,13 +5,11 @@ import os
 import json
 import uuid
 
-# Static folder path for serving React frontend
 static_dir = os.path.join(os.path.dirname(__file__), "build")
-
 app = Flask(__name__, static_folder=static_dir, static_url_path="")
 CORS(app)
 
-# Load Excel matrix
+# Load Excel scoring matrix
 excel_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "framework_matrix.xlsx")
 try:
     df = pd.read_excel(excel_file_path)
@@ -20,7 +18,6 @@ except Exception as e:
     print(f"❌ Error reading Excel file: {e}")
     scoring_data = []
 
-# Factors and frameworks
 framework_data = [
     {"factor": "Team Size", "weight": 3},
     {"factor": "Cross-functional Teams", "weight": 2},
@@ -72,30 +69,47 @@ def recommend():
         "fivesCount": fives_count
     })
 
-# ===============================
-# ✅ UID-based Save & Retrieve
-# ===============================
+# ================
+# Save & Retrieve
+# ================
 RESULTS_FILE = os.path.join(os.path.dirname(__file__), "results.json")
 
 def load_results():
     if not os.path.exists(RESULTS_FILE):
         return []
-    with open(RESULTS_FILE, 'r') as f:
+    with open(RESULTS_FILE, "r") as f:
         return json.load(f)
 
 def save_result_entry(entry):
     results = load_results()
     results.append(entry)
-    with open(RESULTS_FILE, 'w') as f:
+    with open(RESULTS_FILE, "w") as f:
         json.dump(results, f, indent=2)
 
 @app.route("/save-result", methods=["POST"])
 def save_result():
     data = request.get_json()
     recommendations = data.get("recommendations", [])
+    name = data.get("name", "").strip()
+    email = data.get("email", "").strip()
+
+    if not recommendations:
+        return jsonify({"error": "Missing recommendations"}), 400
+
+    results = load_results()
+    for entry in results:
+        if entry.get("name", "").lower() == name.lower() and entry.get("recommendations") == recommendations:
+            if not email or entry.get("email", "").lower() == email.lower():
+                return jsonify({"id": entry["id"]})
+
     new_id = "CT-" + uuid.uuid4().hex[:6]
-    entry = {"id": new_id, "recommendations": recommendations}
-    save_result_entry(entry)
+    new_entry = {
+        "id": new_id,
+        "name": name,
+        "email": email,
+        "recommendations": recommendations
+    }
+    save_result_entry(new_entry)
     return jsonify({"id": new_id})
 
 @app.route("/results/<id>", methods=["GET"])
@@ -106,16 +120,14 @@ def get_result(id):
         return jsonify(result)
     return jsonify({"error": "Result not found"}), 404
 
-# ===============================
-# ✅ Fallback for React SPA Routes
-# ===============================
+# Serve frontend
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def serve_spa(path):
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+    full_path = os.path.join(app.static_folder, path)
+    if path != "" and os.path.exists(full_path):
         return send_from_directory(app.static_folder, path)
-    else:
-        return send_from_directory(app.static_folder, "index.html")
+    return send_from_directory(app.static_folder, "index.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
