@@ -5,9 +5,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: rgb(234, 228, 228);
+    color: #ffffff;
   }
   
+  /* Main Page Title */
+  .page-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  /* Input Section */
   .button-wrapper {
     display: flex;
     flex-direction: column;
@@ -42,14 +52,104 @@
     background-color: #a07eff;
   }
   
+  .error-message {
+    color: #ff7a7a;
+    font-weight: 600;
+    margin-top: 1rem;
+  }
+  
+  /* Results Container */
   .results-card {
-    background-color: white;
-    color: black;
+    background-color: #3d265c;
+    color: #e9e6ff;
     border-radius: 1rem;
     padding: 2rem;
     width: 100%;
-    max-width: 700px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    max-width: 900px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     margin-top: 1rem;
+  }
+  
+  /* Title inside result */
+  .results-heading {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    color: #f0f0ff;
+    margin-bottom: 1rem;
+  }
+  
+  /* Code badge style */
+  .code-badge {
+    display: inline-block;
+    font-family: monospace;
+    background-color: #d1c3ff;
+    color: #2d114d;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.4rem;
+    margin-left: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Project and email info */
+  .project-meta {
+    color: #d9d4ff;
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+  
+  /* Recommendation list */
+  .results-card ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  /* Each framework block */
+  .results-card li {
+    background-color: #f8f4ff;
+    color: #1e1e1e;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    border-left: 4px solid #a07eff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .results-card li:hover {
+    transform: scale(1.015);
+  }
+  
+  /* Framework name */
+  .results-card .text-lg {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #4b0082;
+  }
+  
+  /* Framework description */
+  .results-card .text-sm {
+    white-space: pre-line;
+    font-size: 0.96rem;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  /* Links */
+  .text-link {
+    color: #6b48ff;
+    font-weight: bold;
+    display: inline-block;
+    margin-right: 1rem;
+    margin-top: 0.75rem;
+    text-decoration: none;
+  }
+  
+  .text-link:hover {
+    text-decoration: underline;
   }
   

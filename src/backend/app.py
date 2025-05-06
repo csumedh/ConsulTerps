@@ -1,16 +1,17 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, send_file
 from flask_cors import CORS
 import pandas as pd
 import os
 import json
 import uuid
 
+# Serve from local build folder
 static_dir = os.path.join(os.path.dirname(__file__), "build")
 app = Flask(__name__, static_folder=static_dir, static_url_path="")
 CORS(app)
 
 # Load Excel scoring matrix
-excel_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "framework_matrix.xlsx")
+excel_file_path = os.path.join(os.path.dirname(__file__), "..", "data", "Framework_matrix_new.xlsx")
 try:
     df = pd.read_excel(excel_file_path)
     scoring_data = df.to_dict(orient="records")
@@ -18,60 +19,46 @@ except Exception as e:
     print(f"❌ Error reading Excel file: {e}")
     scoring_data = []
 
-framework_data = [
-    {"factor": "Team Size", "weight": 3},
-    {"factor": "Cross-functional Teams", "weight": 2},
-    {"factor": "Deliverable Frequency", "weight": 2},
-    {"factor": "Flexibility of Changes", "weight": 2},
-    {"factor": "Project Type", "weight": 1},
-    {"factor": "Triple Constraint Priority", "weight": 3},
-    {"factor": "Workflow Flexibility", "weight": 2},
-    {"factor": "Regulations", "weight": 1},
-    {"factor": "Use of Tools", "weight": 1},
-]
-
-frameworks = [
-    "Scrum", "SAFe", "Six Sigma", "PRINCE2", "Stage-Gate",
-    "Kanban", "LeSS", "Waterfall", "Disciplined Agile", "Crystal"
-]
+# Extract all frameworks from the sheet (excluding 'Factor', 'Option', 'Multiplying weight')
+if scoring_data:
+    all_columns = df.columns.tolist()
+    frameworks = [col for col in all_columns if col not in ["Factor", "Option", "Multiplying weight"]]
+else:
+    frameworks = []
 
 @app.route("/recommend", methods=["POST"])
 def recommend():
     data = request.get_json()
     answers = data.get("answers", {})
-
     total_scores = {fw: 0 for fw in frameworks}
     fives_count = {fw: 0 for fw in frameworks}
 
-    for item in framework_data:
-        factor = item["factor"]
-        weight = item["weight"]
+    for row in scoring_data:
+        factor = row.get("Factor")
+        option = row.get("Option")
+        weight = row.get("Multiplying weight", 1)
+
         selected = answers.get(factor)
-        if not selected:
+        if selected != option:
             continue
-        row = next((r for r in scoring_data if r.get("Factor") == factor and r.get("Option") == selected), None)
-        if row:
-            for fw in frameworks:
-                try:
-                    score = float(row.get(fw, 0))
-                except Exception:
-                    score = 0
-                total_scores[fw] += score * weight
-                if score == 5:
-                    fives_count[fw] += 1
+
+        for fw in frameworks:
+            try:
+                score = float(row.get(fw, 0))
+            except Exception:
+                score = 0
+            total_scores[fw] += score * weight
+            if score == 5:
+                fives_count[fw] += 1
 
     sorted_frameworks = sorted(frameworks, key=lambda fw: (total_scores[fw], fives_count[fw]), reverse=True)
     top3 = sorted_frameworks[:3]
-
     return jsonify({
         "recommendations": top3,
         "totalScores": total_scores,
         "fivesCount": fives_count
     })
 
-# ================
-# Save & Retrieve
-# ================
 RESULTS_FILE = os.path.join(os.path.dirname(__file__), "results.json")
 
 def load_results():
@@ -120,14 +107,9 @@ def get_result(id):
         return jsonify(result)
     return jsonify({"error": "Result not found"}), 404
 
-# Serve frontend
-@app.route("/", defaults={"path": ""})
-@app.route("/<path:path>")
-def serve_spa(path):
-    full_path = os.path.join(app.static_folder, path)
-    if path != "" and os.path.exists(full_path):
-        return send_from_directory(app.static_folder, path)
-    return send_from_directory(app.static_folder, "index.html")
+@app.errorhandler(404)
+def not_found(e):
+    return send_file(os.path.join(app.static_folder, "index.html"))
 
 if __name__ == "__main__":
     app.run(debug=True)

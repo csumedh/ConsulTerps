@@ -27,7 +27,7 @@ export default function ResultsLookup() {
 
   return (
     <div className="results-bg">
-      <h1 className="text-white text-3xl font-bold mb-6 text-center">
+      <h1 className="text-3xl font-bold mb-6 text-center">
         View Your Saved Frameworks
       </h1>
 
@@ -48,21 +48,21 @@ export default function ResultsLookup() {
 
       {data && (
         <div className="results-card">
-          <h2 className="text-lg font-semibold mb-4 text-center">
-            Top Frameworks for Code:
-            <span className="font-mono bg-indigo-100 text-indigo-800 px-2 py-1 rounded ml-2">
+          <h2 className="results-heading mb-4 text-center">
+            Top Frameworks for Code:{" "}
+            <span className="inline-block font-mono bg-indigo-100 text-indigo-800 px-2 py-1 rounded ml-2">
               {code}
             </span>
           </h2>
 
           {data.name && (
-            <p className="text-sm text-gray-300 mb-1 text-center">
+            <p className="project-meta">
               <strong>Project:</strong> {data.name}
             </p>
           )}
 
           {data.email && (
-            <p className="text-sm text-gray-300 mb-4 text-center">
+            <p className="project-meta mb-4">
               <strong>Email:</strong> {data.email}
             </p>
           )}
@@ -70,18 +70,36 @@ export default function ResultsLookup() {
           <ol className="list-decimal ml-6 text-base space-y-6">
             {data.recommendations.map((r, i) => (
               <li key={i}>
-                <div className="font-bold text-lg mb-1">{r}</div>
-                <div className="text-sm whitespace-pre-wrap mb-1">
-                  {frameworkInfo[r]?.description || "No description available."}
+                <div className="text-lg font-bold text-purple-900 mb-2">{r}</div>
+                <div className="text-sm whitespace-pre-wrap text-gray-800 leading-relaxed">
+                  {frameworkInfo[r]?.description
+                    .split("\n")
+                    .map((line, idx) => (
+                      <p key={idx} className="mb-2">{line}</p>
+                    ))}
                 </div>
-                <a
-                  href={frameworkInfo[r]?.link || "#"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-blue-500 hover:underline text-sm"
-                >
-                  Visit Official Site 🔗
-                </a>
+                <div className="mt-2">
+                  {frameworkInfo[r]?.getStarted && (
+                    <a
+                      href={frameworkInfo[r].getStarted}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-link"
+                    >
+                      Get Started →
+                    </a>
+                  )}
+                  {frameworkInfo[r]?.learnMore && (
+                    <a
+                      href={frameworkInfo[r].learnMore}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-link"
+                    >
+                      Learn More →
+                    </a>
+                  )}
+                </div>
               </li>
             ))}
           </ol>

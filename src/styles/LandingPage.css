@@ -115,17 +115,17 @@
 }
 
 .team-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 per row */
   gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .team-member {
   background: #2a2a2a;
   padding: 20px;
   border-radius: 12px;
-  width: 180px;
   color: #fff;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -139,6 +139,10 @@
   margin-bottom: 10px;
 }
 
+.social-links {
+  margin-top: 10px;
+}
+
 .social-links a {
   margin: 0 5px;
   font-size: 1.2rem;
@@ -149,6 +153,29 @@
 
 .social-links a:hover {
   color: #00ccff;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-logo {
+    display: none;
+  }
+
+  .overlay {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+  }
 }
 
 /* Fade animation for overlay */

@@ -6,23 +6,23 @@ import "../styles/Results.css";
 import Footer from "../components/Footer";
 
 const frameworkData = [
-  { factor: "Team Size", options: ["Small (1-10 people)", "Medium (11-50 people)", "Large (50+ people)"], tooltip: "Clarifying team size ensures appropriate team structure, effective communication, and optimal project performance. Smaller teams benefit from agile frameworks that emphasize flexibility, rapid decision-making, and close collaboration. Medium-sized teams often require structured methods balancing agility and formality for clear communication and coordination. Larger teams typically benefit from frameworks designed for scalability, structured communication channels, and defined roles, minimizing complexity and maximizing efficiency." },
+  { factor: "Team Size", options: ["Small (<10 people)", "Medium (11-50 people)", "Medium to Large (50-100)", "Large (100- 250 people)", "Enterprise Level (250+)"], tooltip: "Clarifying your team size helps us recommend a project approach tailored to your communication and coordination style. How is your team currently structured—do you operate as a smaller, agile group emphasizing flexibility, a medium-sized team balancing agility with formal roles, or a larger team with clearly defined roles and structured communication?" },
   
-  { factor: "Cross-functional Teams", options: ["Yes", "No"], tooltip: "Clarifying if your teams are cross-functional helps select a framework that supports effective collaboration. Cross-functional teams require methods promoting integrated workflows and clear communication, while specialized teams benefit from clearly defined roles and structured coordination." },
+  { factor: "Cross-functional Teams", options: ["Yes", "No", "I Dont Know"], tooltip: "Choose Yes if each team is a blend of multiple divisions working together end to end. Choose No if tasks are owned by specialist departments and work is handed off from one team to another. This lets us suggest frameworks that fit your team structure: collaboration-heavy methods for integrated teams, or clearer boundary methods for specialized teams." },
   
-  { factor: "Deliverable Frequency", options: ["Daily", "Weekly", "Monthly", "On Demand"], tooltip: "Daily frequency supports urgent, immediate-impact activities, rapid response to feedback, or quick operational tests. \n Weekly is ideal for short, iterative cycles, like promotions or fast-turnaround updates. \n Monthly aligns with structured projects that have clear monthly milestones, such as menu launches or training initiatives.\n On Demand fits projects triggered by specific events, such as store openings or seasonal campaigns, rather than fixed intervals." },
+  { factor: "Deliverable Frequency", options: ["Daily", "Weekly", "Monthly", "On Demand", "I Dont Know"], tooltip: "Letting us know your deliverable frequency helps match recommendations to your operational rhythm. How often does your team currently deliver key outputs? Daily: Quick updates or urgent fixes Weekly: Regular promotions or frequent updates Monthly: Structured releases such as menu changes or training sessions On Demand: Event-based launches or seasonal campaigns" },
   
-  { factor: "Flexibility of Changes", options: ["Rigid", "Somewhat Flexible", "Flexible"], tooltip: "Rigid frameworks follow fixed steps with limited room for mid-course changes—best for predictable, compliance-driven projects.\n Somewhat Flexible approaches allow adjustments at set checkpoints—useful for structured initiatives like campaigns or seasonal rollouts. Flexible frameworks support continuous changes—ideal for fast-paced, feedback-driven work like digital innovation or operational improvements." },
+  { factor: "Flexibility of Changes", options: ["Rigid", "Somewhat Flexible", "Flexible", "I Dont Know"], tooltip: "Understanding how flexible your project framework should be helps us recommend the best fit for managing change during your project. How moldable do you want your approach to be? Rigid: Minimal changes after initial planning, suited for predictable or compliance-focused projects. Somewhat Flexible: Allows occasional adjustments at predefined checkpoints, ideal for structured campaigns or seasonal rollouts. Flexible: Supports continuous changes, best for rapidly evolving projects like digital innovation or operational improvements." },
   
-  { factor: "Project Type", options: ["Product Development", "Operations/Process Improvement"], tooltip: "End‑to‑end product builds require roadmap‑driven planning, stakeholder engagement, and release management to bring new offerings to market.\n Process improvement initiatives depend on iterative audits, waste‑reduction strategies, and performance metrics to optimize operations. \n Hybrid endeavors combine feature delivery and operational refinement, guiding both innovation and efficiency in parallel." },
+  { factor: "Stakeholder Interaction", options: ["Daily or continuous feedback", "Weekly updates", "Only at key milestones", "After project completion", "I Dont Know/ Other"], tooltip: "Knowing how often stakeholders are involved helps us recommend a framework tailored to your communication style. How frequently does your team interact with stakeholders? Daily or continuous: Frequent feedback and rapid input. Weekly: Regular updates and scheduled check-ins. Only at key milestones: Important checkpoints or major deliverables. After project completion: Minimal engagement until final delivery." },
   
-  { factor: "Triple Constraint Priority", options: ["Schedule", "Budget", "Scope"], tooltip: "Your project is a tripod standing on the constraints of budget, scope and shcedule, selecting which leg can be bent most easily can help recommend a more fitting framework: \n Time’s your anchor: When deadlines are carved in stone, time‑boxed methods squeeze maximum value into fixed windows. \n Money’s your margin: If budget drives decisions, cost‑focused approaches phase spending to protect your bottom line. \n Features are fluid: When scope can stretch or shrink, iterative frameworks let you reprioritize and deliver in bite‑sized increments." },
+  { factor: "Triple Constraint Priority", options: ["Schedule", "Budget", "Scope", "I Dont Know"], tooltip: "Your project is a tripod standing on the constraints of budget, scope and shcedule, selecting which leg can be bent most easily can help recommend a more fitting framework: Schedule: Select this if your timeline can shift, but scope and budget are locked. When schedule is flexible, rolling-wave planning lets you refine upcoming milestones while keeping overall delivery on track. Budget: Choose this when funding can rise or fall, while timeline and scope remain steady. When budgets fluctuate, phased cycles help you redistribute resources and maintain progress. Scope: Pick this if you can add or trim features to hit fixed targets on time or cost. When scope can stretch or shrink, iterative frameworks let you reprioritize and deliver in bite-sized increments." },
   
-  { factor: "Workflow Flexibility", options: ["Structured", "Flexible"], tooltip: "Structured: Gate‑driven processes with fixed phases. Unplanned tasks—like a compliance audit—require formal change controls and plan revisions. Selecting this ensures we recommend frameworks built for rigor and tight control.\n Flexible: Pull‑based systems with open backlogs. Ad‑hoc work—such as urgent menu tweaks—slots in seamlessly without derailing progress. Selecting this ensures we recommend flow‑based frameworks optimized for adaptability and rapid response." },
+  { factor: "Workflow Flexibility", options: ["Structured", "Flexible", "I Dont Know"], tooltip: "Knowing your level of workflow flexibility helps us suggest frameworks suited to your team's handling of unplanned tasks. How frequently does your team handle unexpected or variable work? Structured: Tasks rarely change; formal approvals required for unexpected work. Flexible: Tasks frequently change; easily accommodates urgent or ad-hoc requests." },
+
+  { factor: "Regulations", options: ["Yes", "No"], tooltip: "Knowing your regulatory environment helps us recommend a framework suited to your compliance and documentation needs. Does your work involve strict regulatory oversight? Yes: Frequent audits, approvals, and detailed documentation required. No: Minimal oversight, emphasizing speed, flexibility, and streamlined processes." },
   
-  { factor: "Regulations", options: ["Yes", "No"], tooltip: "Yes: For work needing regular audits, sign‑offs, and strict adherence to standards—like food‑safety inspections or data‑privacy reviews—we’ll recommend frameworks with built‑in checkpoints, documentation, and governance gates.\n No: For less regulated initiatives, you can lean on streamlined methodologies that minimize paperwork and overhead while maximizing speed and flexibility." },
-  
-  { factor: "Use of Tools", options: ["Yes or Open to Use", "No"], tooltip: "Clarifying your openness to digital tracking ensures recommendations match your team’s workflow:\n Yes: Teams using backlogs, Kanban or sprint boards, and burndown/burnup charts can leverage tool‑centric frameworks like Scrum, SAFe, or LeSS for maximum visibility and metrics.\n No: If you rely on manual or low‑tech tracking—whiteboards, simple checklists or spreadsheets—we’ll recommend frameworks that thrive without specialized apps." }
+  { factor: "Use of Tools", options: ["Yes or Open to Use", "No", "I Dont Know"], tooltip: "Knowing if your team uses digital tracking helps us suggest frameworks that align with your current methods. Do you currently track tasks digitally? Yes: Regular use of digital tools like Kanban boards, sprint trackers, or task management apps. No: Primarily manual tracking methods like whiteboards, physical checklists, or paper-based systems." },
 ];
 
 export default function FrameworkRecommender() {
@@ -37,12 +37,17 @@ export default function FrameworkRecommender() {
   const resultsRef = useRef(null);
   const currentIndex = Object.keys(answers).length;
 
-const handleCopy = () => {
-  navigator.clipboard.writeText(userId);
-  setCopied(true);
-  setTimeout(() => setCopied(false), 2000);
-};
-
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(userId || "");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Copy failed:", err);
+      alert("Copy to clipboard failed.");
+    }
+  };
+  
   const handleChange = (factor, value) => {
     setAnswers({ ...answers, [factor]: value });
   };
@@ -193,57 +198,73 @@ const handleCopy = () => {
         </div>
       )}
 
-      {/* Results */}
-      {showResults && (
-        <div ref={resultsRef} className="w-full max-w-2xl mt-12 bg-[#f0e6ff] text-black rounded-xl p-6">
-          {userId && (
-            <div className="mb-4 p-4 bg-white rounded shadow">
-              <strong>Your Identifier:</strong>{" "}
-              <span className="text-purple-700">{userId}</span><br />
-              Save this ID to retrieve your results later.
+ {/* Results */}
+ {showResults && (
+    <>
+      <div ref={resultsRef} className="results-container">
+        {userId && (
+          <div className="id-box">
+            <div>
+              <strong>Your ID:</strong> <code>{userId}</code>
             </div>
-          )}
-
-          <h2 className="text-2xl font-bold mb-3">Your Inputs</h2>
-          {userId && (
-            <div className="mb-4 text-sm text-gray-800 flex items-center gap-2">
-              <span><strong>Your ID:</strong> <code>{userId}</code></span>
-              <button
-                onClick={handleCopy}
-                className="px-2 py-1 bg-gray-300 rounded hover:bg-gray-400 text-xs"
-              >
-                Copy
-              </button>
-              {copied && <span className="text-green-600">Copied!</span>}
+            <button onClick={handleCopy} className="copy-button">
+              {copied ? "Copied!" : "Copy"}
+            </button>
+            <div className="save-message">
+              📌 Save this ID to revisit your results later.
             </div>
-          )}
-          <ul className="list-disc ml-6 mb-6">
-            {Object.entries(answers).map(([factor, value]) => (
-              <li key={factor}><strong>{factor}:</strong> {value}</li>
-            ))}
-          </ul>
+          </div>
+        )}
 
-          <ol className="list-decimal ml-6 space-y-6">
-            {results.map(fw => (
-              <li key={fw} className="break-words">
-                <div className="font-bold">{fw}</div>
-                <div className="text-sm break-words whitespace-pre-wrap">
-                  {frameworkInfo[fw]?.description || "No description available."}
+        <div className="results-boxes">
+          <div className="input-box">
+            <h3>Your Inputs</h3>
+            <ul>
+              {Object.entries(answers).map(([factor, value]) => (
+                <li key={factor}>
+                  <strong>{factor}:</strong> {value}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="recommendation-box">
+            <h3>Top 3 Frameworks</h3>
+            <div className="framework-grid">
+              {results.map((fw) => (
+                <div key={fw} className="framework-card">
+                  <div className="font-bold text-lg mb-1">{fw}</div>
+                  <div className="text-sm whitespace-pre-wrap mb-2">
+                    {frameworkInfo[fw]?.description || "No description available."}
+                  </div>
+                  {frameworkInfo[fw]?.getStarted && (
+                    <a
+                      href={frameworkInfo[fw].getStarted}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Get Started →
+                    </a>
+                  )}
+                  {frameworkInfo[fw]?.learnMore && (
+                    <a
+                      href={frameworkInfo[fw].learnMore}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Learn More →
+                    </a>
+                  )}
                 </div>
-                <a
-                  href={frameworkInfo[fw]?.link || "#"}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-blue-500 hover:underline text-sm"
-                >
-                  Visit Official Site 🔗
-                </a>
-              </li>
-            ))}
-          </ol>
+              ))}
+            </div>
+
+          </div>
         </div>
-      )}
+      </div>
       <Footer />
-    </div>
-  );
+    </>
+    )}
+  </div>
+); 
 }

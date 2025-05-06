@@ -1,5 +1,8 @@
 @echo off
 echo 🚧 Building React frontend...
+
+:: ✅ Set OpenSSL legacy provider for Node 17+ compatibility
+set NODE_OPTIONS=--openssl-legacy-provider
 call npm run build
 
 if errorlevel 1 (
