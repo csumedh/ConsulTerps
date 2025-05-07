@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start-all": "concurrently \"serve -s build -l 3000\" \"uvicorn main:app --host 0.0.0.0 --port 5000 --reload\""
