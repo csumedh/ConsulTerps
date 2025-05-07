@@ -13,7 +13,7 @@ export default function ResultsLookup() {
     setData(null);
 
     try {
-      const res = await fetch(`http://localhost:5000/results/${code}`);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/results/${code}`);
       const result = await res.json();
       if (result.recommendations) {
         setData(result);

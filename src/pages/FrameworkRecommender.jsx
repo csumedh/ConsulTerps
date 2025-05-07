@@ -71,7 +71,7 @@ export default function FrameworkRecommender() {
     if (currentIndex !== frameworkData.length) return;
     setLoading(true);
     setShowResults(false);
-    fetch("http://localhost:5000/recommend", {
+    fetch(`${process.env.REACT_APP_API_URL}/recommend`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ answers })
@@ -86,7 +86,7 @@ export default function FrameworkRecommender() {
           resultsRef.current?.scrollIntoView({ behavior: "smooth" });
 
           // Save to backend and get UID
-          fetch("http://localhost:5000/save-result", {
+          fetch(`${process.env.REACT_APP_API_URL}/save-result`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
