@@ -118,6 +118,12 @@
     margin-bottom: 2rem;
     transition: transform 0.2s ease;
   }
+
+  .results-card li::marker {
+    font-weight: bold;
+    color: #ffffff; 
+    font-size: 1.2rem;
+  }
   
   .results-card li:hover {
     transform: scale(1.015);

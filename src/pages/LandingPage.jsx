@@ -5,26 +5,19 @@ import Footer from "../components/Footer";
 export default function LandingPage() {
   return (
     <div className="landing-wrapper">
-      {/* === Hero Section with Video Background === */}
+      {/* === Hero Section === */}
       <section className="hero-section">
         <video className="bg-video" autoPlay loop muted>
           <source src="/background.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <div className="overlay">
-          {/* Left Side Text */}
           <div className="overlay-left">
             <div className="hero-quote">Your project's a work of art...</div>
             <h1 className="hero-logo-title">SELECTSMART</h1>
             <div className="hero-subtext">by ConsulTerps</div>
           </div>
-
-          {/* Right Side Logo */}
-          <img
-            src="/logo192.png"
-            alt="SelectSmart Logo"
-            className="hero-logo"
-          />
+          <img src="/logo192.png" alt="SelectSmart Logo" className="hero-logo" />
         </div>
       </section>
 
@@ -38,8 +31,15 @@ export default function LandingPage() {
             choosing the right project methodology.
           </p>
         </div>
-        <div className="about-gif">
-          <img src="/about-animation.gif" alt="About Animation" />
+
+        <div className="about-video-centered">
+          <iframe
+            src="https://www.youtube.com/embed/VExVOi2VF7s"
+            title="SelectSmart Introduction"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
         </div>
       </section>
 
@@ -52,74 +52,71 @@ export default function LandingPage() {
               name: "Sumedh",
               role: "Project Manager",
               img: "/team/bob.jpg",
-              github: "https://github.com/bob",
-              linkedin: "https://linkedin.com/in/bob",
-              email: "mailto:bob@example.com",
-            },            
+              github: "https://github.com/csumedh",
+              linkedin: "https://www.linkedin.com/in/sumedhchinchmalatpure/",
+              email: "mailto:sumedh.chinch@gmail.com",
+            },
             {
               name: "Sandra",
               role: "Frontend Developer",
               img: "/team/carol.jpg",
-              github: "https://github.com/alice",
-              linkedin: "https://linkedin.com/in/alice",
-              email: "mailto:alice@example.com",
+              github: "https://github.com/sstaub1",
+              linkedin: "https://www.linkedin.com/in/sandrahartstaub/",
+              email: "mailto:sstaub1@umd.edu",
             },
-
             {
               name: "Anand",
               role: "Backend Developer",
               img: "/team/alice.jpg",
-              github: "https://github.com/carol",
-              linkedin: "https://linkedin.com/in/carol",
-              email: "mailto:carol@example.com",
+              github: "https://github.com/anandkannappan333",
+              linkedin: "https://www.linkedin.com/in/anandkannappan333/",
+              email: "mailto:anand333@umd.edu",
             },
-
             {
               name: "Matthew",
               role: "R&D",
               img: "/team/Matt.jpeg",
-              github: "https://github.com/carol",
-              linkedin: "https://linkedin.com/in/carol",
-              email: "mailto:carol@example.com",
+              github: "https://github.com/matthewhanstad",
+              linkedin: "https://www.linkedin.com/in/matthew-hanstad-547642270/",
+              email: "mailto:mhanstad@umd.edu",
             },
             {
               name: "Aishwarya",
               role: "Scrum Master",
               img: "/team/Aish.jpeg",
-              github: "https://github.com/carol",
-              linkedin: "https://linkedin.com/in/carol",
-              email: "mailto:carol@example.com",
+              github: "https://github.com/AishwaryaL24",
+              linkedin: "https://www.linkedin.com/in/aishwaryalandekar/",
+              email: "mailto:aishland@umd.edu",
             },
             {
               name: "Deepankar",
               role: "Designer",
               img: "/team/deep.jpeg",
-              github: "https://github.com/carol",
-              linkedin: "https://linkedin.com/in/carol",
-              email: "mailto:carol@example.com",
+              github: "https://github.com/deepukun79",
+              linkedin: "www.linkedin.com/in/deepankar-sengar-056682218",
+              email: "mailto:lucky.deepankar@gmail.com",
             },
           ].map((member) => (
             <div className="team-member" key={member.name}>
-              <img
-                src={member.img}
-                alt={member.name}
-                className="member-pic"
-              />
+              <img src={member.img} alt={member.name} className="member-pic" />
               <h3>{member.name}</h3>
               <p>{member.role}</p>
               <div className="social-links">
-                <a href={member.github} target="_blank" rel="noreferrer">
-                  🐙
+                <a href={member.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                  <i className="fab fa-github"></i>
                 </a>
-                <a href={member.linkedin} target="_blank" rel="noreferrer">
-                  🔗
+                <a href={member.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                  <i className="fab fa-linkedin"></i>
                 </a>
-                <a href={member.email}>✉️</a>
+                <a href={member.email} aria-label="Email">
+                  <i className="fas fa-envelope"></i>
+                </a>
               </div>
             </div>
           ))}
         </div>
       </section>
+
       <Footer />
     </div>
   );

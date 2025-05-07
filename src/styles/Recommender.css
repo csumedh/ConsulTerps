@@ -277,3 +277,23 @@
 .framework-card a:hover {
   text-decoration: underline;
 }
+.framework-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #4b0082;
+  margin-bottom: 0.75rem;
+}
+.faq-steps {
+  list-style-type: decimal;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.faq-image {
+  margin-top: 1rem;
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}

@@ -233,7 +233,7 @@ export default function FrameworkRecommender() {
             <div className="framework-grid">
               {results.map((fw) => (
                 <div key={fw} className="framework-card">
-                  <div className="font-bold text-lg mb-1">{fw}</div>
+                  <div className="framework-title">{fw}</div>
                   <div className="text-sm whitespace-pre-wrap mb-2">
                     {frameworkInfo[fw]?.description || "No description available."}
                   </div>
