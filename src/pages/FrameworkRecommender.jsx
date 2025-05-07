@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import "../App.css";
 import frameworkInfo from "../data/frameworkInfo";
 import "../styles/Recommender.css";
-import "../../styles/Results.css";
+import "../styles/Results.css";
 import Footer from "../components/Footer";
 
 const frameworkData = [
