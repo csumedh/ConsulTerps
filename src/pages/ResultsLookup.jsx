@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import frameworkInfo from "../data/frameworkInfo";
-import "../styles/Results.css";
+import "../styles/results.css";
 import Footer from "../components/Footer";
 
 export default function ResultsLookup() {
