@@ -1,4 +1,4 @@
-const frameworkInfo = {
+  const frameworkInfo = {
     "Scrum": {
       description: [
         "Scrum is one of the most widely used Agile frameworks, known for its sprint-based structure, fixed roles (Scrum Master, Product Owner, Developers), and emphasis on iterative delivery. It is highly effective for fast-paced product development projects where requirements evolve rapidly and quick feedback loops are essential. Based on your decision weights, Scrum is best suited for small, cross-functional teams that can deliver weekly, prefer flexible workflows, and prioritize scope as the most adjustable constraint. It thrives in non-regulated environments and integrates seamlessly with modern tools like Jira and Trello.",
@@ -24,7 +24,7 @@ const frameworkInfo = {
        "-Choose SAFe if multiple teams need to align under shared planning and delivery cycles."
       ].join("\n\n"),
       getStarted: "https://trello.com/b/faJlpTDO/safe-framework-template",
-      learnMore: "https://www.atlassian.com/scale/agile/scaled-agile-framework"
+      learnMore: "https://www.atlassian.com/agile/agile-at-scale/what-is-safe"
     },
     "Six Sigma": {
       description: [
@@ -32,8 +32,7 @@ const frameworkInfo = {
         "-Six Sigma is most effective in environments where precision, efficiency, and quality are top priorities.",
         "-Choose Six Sigma for stable processes needing optimization—not rapidly changing product builds."        
       ].join("\n\n"),
-      getStarted: "https://www.isixsigma.com/",
-      learnMore: "https://www.tutorialspoint.com/six_sigma/index.htm"
+      getStarted: "https://sixsigmadsi.com/whats-the-first-step-to-certification",
     },
     "PRINCE2": {
       description: [
@@ -42,7 +41,7 @@ const frameworkInfo = {
         "-Choose this framework when you need structure, accountability, and clearly assigned roles."
       ].join("\n\n"),
       getStarted: "https://www.axelos.com/best-practice-solutions/prince2",
-      learnMore: "https://www.prince2.com/eur"
+      learnMore: "https://www.prince2.com/usa/resources"
     },
     "Stage-Gate": {
       description: [
@@ -51,7 +50,7 @@ const frameworkInfo = {
         "-Choose Stage-Gate when decisions need executive approval before progressing."
       ].join("\n\n"),
       getStarted: "https://trello.com/b/bcUw8gGG/stage-gate-framework-template",
-      learnMore: "https://www.prod-dev.com/stage-gate-model/"
+      learnMore: "https://www.stage-gate.com/blog/the-stage-gate-model-an-overview"
     },
     "LeSS": {
       description: [
@@ -60,7 +59,7 @@ const frameworkInfo = {
         "-Choose LeSS when your teams already use Scrum but now need to coordinate more closely."
       ].join("\n\n"),
       getStarted: "https://less.works/",
-      learnMore: "https://www.scaledagileframework.com/compare-less-and-safe/"
+      learnMore: "https://www.atlassian.com/agile/agile-at-scale/less"
     },
     "Waterfall": {
       description: [
@@ -68,8 +67,8 @@ const frameworkInfo = {
         "-Waterfall fits well in civil engineering, defense, and regulated manufacturing.",
         "-Choose Waterfall if you need high predictability, heavy documentation, and sequential sign-offs."
       ].join("\n\n"),
-      getStarted: "https://www.atlassian.com/agile/project-management/waterfall",
-      learnMore: "https://www.wrike.com/project-management-guide/methodologies/waterfall/"
+      getStarted: "https://www.projectmanager.com/guides/waterfall-methodology",
+      learnMore: "https://www.atlassian.com/agile/project-management/project-management-intro"
     },
     "Disciplined Agile": {
       description: [
@@ -77,8 +76,8 @@ const frameworkInfo = {
         "-DA is especially useful in enterprise settings moving from chaos to guided agility.",
         "-Choose DA when you need structured choices rather than one prescribed method."
       ].join("\n\n"),
-      getStarted: "https://www.pmi.org/disciplined-agile",
-      learnMore: "https://www.techwell.com/techwell-insights/2019/09/what-disciplined-agile-delivery"
+      getStarted: "https://trello.com/b/ly9JJI2N/disciplined-agile-framework-template",
+      learnMore: "https://www.pmi.org/disciplined-agile"
     },
     "Crystal": {
       description: [
@@ -86,10 +85,9 @@ const frameworkInfo = {
         "-Crystal excels in face-to-face environments where close collaboration and rapid iteration are key.",
         "-Choose Crystal if your team values adaptability, low process friction, and fast decision-making."
       ].join("\n\n"),
-      getStarted: "https://agilemanifesto.org/",
-      learnMore: "https://www.agilealliance.org/agile101/crystal/"
+      getStarted: "https://www.6sigma.us/lean-six-sigma-articles/crystal-agile-methodology/",
+      learnMore: "https://monday.com/blog/rnd/agile-crystal/"
     }
   };
   
   export default frameworkInfo;
-  

@@ -32,25 +32,39 @@ export default function FAQPage() {
               <img src="/Faq/faq5.png" alt="Step 5" className="faq-image" />
             </li>
             <li>
-              After the final question, click Get Recommendations. The wizard analyses your inputs, as testudo walks you to the results screen.
+              After the final question, click Get Recommendations. The wizard analyses your inputs, as our ConsulTurtle walks you to the results screen.
               <img src="/Faq/faq6.png" alt="Step 6" className="faq-image" />
             </li>
             <li>
-              At the top of the results page you’ll see a unique code. Copy it to save the information, this is the only way to reopen these exact results later.
+              At the top of the results page you’ll see a unique code. Copy it and store it safely to view the results later.
               <img src="/Faq/faq7.png" alt="Step 7" className="faq-image" />
             </li>
             <li>
-              To your left - A concise recap of every answer you provided for easy reference.
-              To your Right – Your Top 3 Frameworks
-              For each recommended framework you’ll find:
-              - A short summary of its strengths.
-              - A “Get Started” link to guides.
-              - When applicable, a sample Trello board link so you can get started quickly!
+              <p>To your left – A concise recap of every answer you provided for easy reference.</p>
+              <p>To your right – Your Top 3 Frameworks</p>
+              <p>For each recommended framework you’ll find:</p>
+              <p>- A short summary of its strengths.</p>
+              <p>- A “Get Started” link to guides.</p>
+              <p>- When applicable, a sample Trello board link so you can get started quickly!</p>
               <img src="/Faq/faq8.png" alt="Step 8" className="faq-image" />
             </li>
             <li>
               Return to Results › Retrieve, paste your unique code, and your full recommendation set reappears instantly!
               <img src="/Faq/faq9.png" alt="Step 9" className="faq-image" />
+            </li>
+          </ol>
+        </div>
+
+        <h1 className="faq-heading">Cloning the Trello Template</h1>
+        <div className="faq-card">
+          <ol className="faq-steps">
+            <li>
+              Open the board menu by clicking the three‑dot icon in the upper‑right corner of the template.
+              <img src="/Faq/faq10.png" alt="Step 1" className="faq-image" />
+            </li>
+            <li>
+              In the menu, give the board a name, pick your workspace, and click Create—you now have a starting off point!
+              <img src="/Faq/faq11.png" alt="Step 2" className="faq-image" />
             </li>
           </ol>
         </div>
